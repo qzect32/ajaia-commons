@@ -6,9 +6,9 @@ Date: 2026-10-26
 
 ## Links
 
-- Live product: https://pre-messaging-freeze-let.trycloudflare.com
+- Live product: https://ajaia.pp-0.com
 - Source: https://github.com/qzect32/ajaia-commons
-- Walkthrough video (~3:01): https://pre-messaging-freeze-let.trycloudflare.com/walkthrough.mp4
+- Walkthrough video (~3:01): https://ajaia.pp-0.com/walkthrough.mp4
 - Video URL file: `VIDEO.txt`
 
 This packet is the public GitHub repo (source + notes + screenshots + video). A Google Drive copy is not created from this environment; the repo is the canonical folder.
@@ -41,8 +41,8 @@ Password for all seeded users: `commons-demo`
 
 - Create, rename, edit, autosave, reopen
 - Bold, italic, underline, headings, lists (TipTap)
-- Import `.txt` / `.md` / `.html` / `.htm` / `.docx` (5 MB)
-- Attachments on a document (5 MB)
+- Import `.txt` / `.md` / `.html` / `.htm` / `.docx` (100 MB per file, 15 GB host quota)
+- Attachments on a document (same caps)
 - Owner vs editor; owned vs shared lists
 - SQLite persistence of documents, shares, formatting
 - Validation errors on login, share, import type/size
@@ -53,11 +53,10 @@ Password for all seeded users: `commons-demo`
 - No comments, suggestions, or version history
 - No PDF/Markdown export
 - Auth is HMAC session cookies + seeded users, not production identity
-- Live URL is a Cloudflare quick tunnel in front of `next start` on this machine. It is free. It will go down if the host process stops. Repo + Docker remain the durable path.
+- Live URL is https://ajaia.pp-0.com on AWS Lightsail. DNS, instance, static IP, and 15 GB data volume are scheduled for full removal 2027-11-15 00:00 America/New_York.
 
 ## Next 2–4 hours
 
-- Named/stable host (Fly or a small VPS) instead of a quick tunnel
 - Conflict-safe concurrent edits or a “someone else is viewing” flag
 - Markdown export
 - Playwright e2e for share + import

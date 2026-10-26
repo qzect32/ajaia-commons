@@ -217,7 +217,7 @@ export default function Workspace() {
           </button>
         </div>
         <p className="px-4 pb-2 text-[11px] leading-snug text-ink-soft">
-          Import .txt, .md, .html, or .docx as a new document. Max 5 MB.
+          Import .txt, .md, .html, or .docx as a new document. Max 100 MB. Host quota 15 GB.
         </p>
         <input
           className="mx-3 mb-3 border border-rule bg-paper px-3 py-2 text-sm"
@@ -317,7 +317,7 @@ export default function Workspace() {
                   </button>
                 </div>
                 {attachments.length === 0 ? (
-                  <p className="mt-2 text-sm text-ink-soft">No files attached. Any file up to 5 MB.</p>
+                  <p className="mt-2 text-sm text-ink-soft">No files attached. Any file up to 100 MB (15 GB host quota).</p>
                 ) : (
                   <ul className="mt-3 space-y-1">
                     {attachments.map((file) => (

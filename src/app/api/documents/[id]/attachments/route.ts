@@ -2,11 +2,10 @@ import { NextResponse } from "next/server";
 import { requireUser } from "@/lib/auth";
 import { addAttachment, listAttachments } from "@/lib/db";
 import { jsonError } from "@/lib/http";
+import { assertUploadSize } from "@/lib/limits";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-
-const MAX_BYTES = 5 * 1024 * 1024;
 
 export async function GET(_request: Request, context: { params: Promise<{ id: string }> }) {
   try {
@@ -27,9 +26,7 @@ export async function POST(request: Request, context: { params: Promise<{ id: st
     if (!(file instanceof File)) {
       return NextResponse.json({ error: "Choose a file to attach." }, { status: 400 });
     }
-    if (file.size > MAX_BYTES) {
-      return NextResponse.json({ error: "File is larger than 5 MB." }, { status: 400 });
-    }
+    assertUploadSize(file.size);
     const attachment = addAttachment(id, user.id, {
       filename: file.name,
       mime: file.type || "application/octet-stream",

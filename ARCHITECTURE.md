@@ -35,7 +35,7 @@ That is enough to demonstrate intent. Role explosion (viewer, commenter, domain-
 
 ## File handling
 
-Two product-relevant paths, both capped at 5 MB:
+Two product-relevant paths, each file capped at 100 MB, host volume capped at 15 GB:
 
 - **Import** `.txt` / `.md` / `.html` / `.docx` → new document or replace current draft
 - **Attach** any file to a document (receipt, screenshot, export) stored on disk and authorized through the same share rules

@@ -3,11 +3,10 @@ import { requireUser } from "@/lib/auth";
 import { createDocument, updateDocument } from "@/lib/db";
 import { fileToHtml, isSupportedImport } from "@/lib/importFile";
 import { jsonError } from "@/lib/http";
+import { assertStorageRoom, assertUploadSize } from "@/lib/limits";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-
-const MAX_BYTES = 5 * 1024 * 1024;
 
 export async function POST(request: Request) {
   try {
@@ -18,9 +17,8 @@ export async function POST(request: Request) {
     if (!(file instanceof File)) {
       return NextResponse.json({ error: "Choose a file to import." }, { status: 400 });
     }
-    if (file.size > MAX_BYTES) {
-      return NextResponse.json({ error: "File is larger than 5 MB." }, { status: 400 });
-    }
+    assertUploadSize(file.size);
+    assertStorageRoom(file.size);
     if (!isSupportedImport(file.name)) {
       return NextResponse.json(
         { error: "Unsupported type. Import .txt, .md, .html, or .docx." },

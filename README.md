@@ -6,9 +6,11 @@ Not a Google Docs clone. A working product slice: create, rename, rich-text edit
 
 ## Live demo
 
-https://pre-messaging-freeze-let.trycloudflare.com
+https://ajaia.pp-0.com
 
-Walkthrough: https://pre-messaging-freeze-let.trycloudflare.com/walkthrough.mp4
+Walkthrough: https://ajaia.pp-0.com/walkthrough.mp4
+
+This host is on personal AWS (Lightsail in us-east-1). Data volume is a 15 GB loop at `/data`. The instance, static IP, DNS for `ajaia.pp-0.com`, and teardown Lambda are scheduled for deletion at 2027-11-15 00:00 America/New_York. Apex `pp-0.com` and `portfolio.pp-0.com` are not part of this stack.
 
 Seeded accounts:
 
@@ -42,7 +44,8 @@ Optional env:
 
 ```
 SESSION_SECRET=change-me-in-production
-DATABASE_PATH=/absolute/path/commons.db
+DATABASE_PATH=/data/commons.db
+DATA_DIR=/data
 ```
 
 ## What works
@@ -50,8 +53,8 @@ DATABASE_PATH=/absolute/path/commons.db
 - Sign in with seeded users (signed httpOnly cookie, no paid auth vendor)
 - Create / rename / autosave / reopen documents
 - Bold, italic, underline, H1/H2, bulleted and numbered lists
-- Import `.txt`, `.md`, `.html`, `.docx` as a new document, or replace the current draft (5 MB cap, types shown in the UI)
-- Attach any file to a document and download it again
+- Import `.txt`, `.md`, `.html`, `.docx` as a new document, or replace the current draft (100 MB cap, 15 GB host quota, types shown in the UI)
+- Attach any file to a document and download it again (same caps)
 - Owner grants editor access by email; owned vs shared lists are separate
 - Persistence in SQLite so refresh keeps documents and shares
 

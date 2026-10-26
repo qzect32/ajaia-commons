@@ -10,6 +10,7 @@ import {
   canWrite,
   type AccessDocument,
 } from "./access";
+import { assertStorageRoom, dataDir } from "./limits";
 
 const DEMO_PASSWORD_HASH =
   "$2b$10$XVFlD6QINyARO/nP4ST6X.e3TeC7esTbIWXZ5mltOIALsr7uCiVeO";
@@ -392,9 +393,11 @@ export function addAttachment(
     (err as Error & { status: number }).status = 403;
     throw err;
   }
+  assertStorageRoom(file.size);
   const id = randomUUID();
-  const rel = path.join("data", "uploads", docId, `${id}-${file.filename}`);
-  const abs = path.join(process.cwd(), rel);
+  const safe = file.filename.replace(/[^a-zA-Z0-9._-]+/g, "_").slice(0, 180) || "file";
+  const rel = path.join("uploads", docId, `${id}-${safe}`);
+  const abs = path.join(dataDir(), rel);
   fs.mkdirSync(path.dirname(abs), { recursive: true });
   fs.writeFileSync(abs, file.buffer);
   const now = new Date().toISOString();
@@ -442,5 +445,6 @@ export function getAttachmentFile(
     | { filename: string; mime: string; path: string }
     | undefined;
   if (!att) return null;
-  return { filename: att.filename, mime: att.mime, absPath: path.join(process.cwd(), att.path) };
+  const absPath = path.isAbsolute(att.path) ? att.path : path.join(dataDir(), att.path);
+  return { filename: att.filename, mime: att.mime, absPath };
 }
