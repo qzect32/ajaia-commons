@@ -8,7 +8,7 @@ Date: 2026-10-26
 
 - Live product: https://pre-messaging-freeze-let.trycloudflare.com
 - Source: https://github.com/qzect32/ajaia-commons
-- Walkthrough video: https://pre-messaging-freeze-let.trycloudflare.com/walkthrough.mp4
+- Walkthrough video (~3:01): https://pre-messaging-freeze-let.trycloudflare.com/walkthrough.mp4
 - Video URL file: `VIDEO.txt`
 
 This packet is the public GitHub repo (source + notes + screenshots + video). A Google Drive copy is not created from this environment; the repo is the canonical folder.
@@ -32,7 +32,7 @@ Password for all seeded users: `commons-demo`
 - `WALKTHROUGH.md` — spoken outline for the video
 - `VIDEO.txt` — public video URL
 - `public/demo/login.png`, `public/demo/workspace.png`
-- `public/walkthrough.mp4` (~90s narrated stills of the live UI)
+- `public/walkthrough.mp4` (~3:01 narrated screen capture of login, editor, share, and seeded users)
 - Tests: `tests/access.test.ts`, `tests/db.test.ts`, `tests/importFile.test.ts`
 - `Dockerfile` for a self-hosted Node + SQLite deploy
 - Fixture: `fixtures/sprint-notes.md`
